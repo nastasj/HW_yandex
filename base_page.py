@@ -38,6 +38,20 @@ class BasePage:
 
         return False
 
+    def is_element_disabled(self, how, what):
+        assert self.browser.find_element(how, what).is_enabled() is False
+
+    def is_element_enabled(self, how, what):
+        assert self.browser.find_element(how, what).is_enabled()
+
+    def switch_tab(self, how, what):
+        element = self.browser.find_element(how, what)
+        self.browser.execute_script("arguments[0].click();", element)
+
+    def scroll_up(self):
+        self.browser.execute_script("window.scrollTo(0, -document.body.scrollHeight);")
+        # self.browser.find_element_by_tag_name('body').send_keys(Keys.CONTROL + Keys.HOME)
+
     def go_to_login_page(self):
         link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         link.click()
@@ -63,7 +77,19 @@ class BasePage:
         time.sleep(2)
         suggested_list = self.browser.find_elements(how3, what3)
         for i in range(len(suggested_list)):
-            suggest = suggested_list[i].get_attribute('textContent')
-            if suggest == filling:
-                suggested_list[i].click()
-                break
+            suggest[i] = suggested_list[i].get_attribute('textContent')
+
+    def search_results_should_contain_letter(self):
+        upper_letter, lower_letter = self.choose_random_letter()
+        self.browser.find_element(*FeaturePageLocators.CITY_CHOOSER_FIELD).click()
+        self.browser.find_element(*FeaturePageLocators.CITY_SEARCH_BOX).send_keys(upper_letter)
+        suggested_list = self.browser.find_elements(*FeaturePageLocators.CITY_SUGGESTED)
+        number = random.randint(0, len(suggested_list) - 1)
+        suggest = suggested_list[number].get_attribute('textContent')
+            assert upper_letter in suggest or lower_letter in suggest
+
+    def should_be_correct_redirect(self, how, what):
+        self.browser.find_element(how, what).click()
+        window_after = self.browser.window_handles[1]
+        self.browser.switch_to.window(window_after)
+        time.sleep(3)

@@ -1,10 +1,14 @@
 from selenium.webdriver.common.by import By
 
 
-class BasePageLocators:
-    CITY_CHOOSER_FIELD = (By.CSS_SELECTOR, '[data-marker="location-chooser/value"]')
-    CITY_SEARCH_BOX = (By.CSS_SELECTOR, '[data-marker="region-search-bar/search"]')
-    SUBWAY_CHOOSER_FIELD = (By.CSS_SELECTOR, '[data-marker="metro-select/withoutValue"]')
-    ALPHABET_CHOOSER_TAB = (By.CSS_SELECTOR, '[class ="css-17syd5g"][tabindex="0"]')
-    LINE_CHOOSER_TAB = (By.CSS_SELECTOR, '[class ="css-17syd5g"][tabindex="-1"]')
-    STATIONS_ALPHABET_LIST_FIELD = (By.CLASS_NAME, "css-1nm6007")
+class FeaturePageLocators:
+    LOGIN_BUTTON = (By.CLASS_NAME, 'desk-notif-card__login-new-items')
+    MARKET_LINK = (By.CSS_SELECTOR, '[data-id="market"]')
+    VIDEO_LINK = (By.CSS_SELECTOR, '[data-id="video"]')
+    IMAGES_LINK = (By.CSS_SELECTOR, '[data-id="images"]')
+    NEWS_LINK = (By.CSS_SELECTOR, '[data-id="news"]')
+    MAPS_LINK = (By.CSS_SELECTOR, '[data-id="maps"]')
+    TRANSLATE_LINK = (By.CSS_SELECTOR, '[data-id="translate"]')
+    MUSIC_LINK = (By.CSS_SELECTOR, '[data-id="music"]')
+    MORE_LINK = (By.CSS_SELECTOR, '[data-id="more"]')
+    INPUT_BOX = (By.CSS_SELECTOR, '[span[class="input__box"]]')
