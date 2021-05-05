@@ -1,3 +1,5 @@
+import time
+
 from selenium import webdriver as RemoteWebDriver
 from selenium.common.exceptions import NoSuchElementException
 import random
@@ -28,6 +30,7 @@ class BasePage:
         self.browser.find_element(how, what).click()
         window_after = self.browser.window_handles[1]
         self.browser.switch_to.window(window_after)
+        time.sleep(1)
 
 
 

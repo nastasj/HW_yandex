@@ -20,6 +20,7 @@ def browser(request):
         fp = webdriver.FirefoxProfile()
         print("\nstart firefox browser for test..")
         browser = webdriver.Firefox(firefox_profile=fp)
+        browser.maximize_window()
     else:
         print("Browser <browser_name> still is not implemented")
     # browser.implicitly_wait(5)
