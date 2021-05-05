@@ -13,7 +13,8 @@ def browser(request):
     browser_name = request.config.getoption("browser_name")
     if browser_name == "chrome":
         options = Options()
-        options.add_experimental_option('excludeSwitches', ['enable-logging'])
+        options.add_argument('--start-maximized')
+        # options.add_experimental_option('excludeSwitches', ['enable-logging'])
         browser = webdriver.Chrome(options=options)
         print("\nstart chrome browser for test..")
     elif browser_name == "firefox":
