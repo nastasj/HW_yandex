@@ -16,14 +16,12 @@ def browser(request):
         options.add_argument('--start-maximized')
         # options.add_experimental_option('excludeSwitches', ['enable-logging'])
         browser = webdriver.Chrome(options=options)
-        print("\nstart chrome browser for test..")
     elif browser_name == "firefox":
         fp = webdriver.FirefoxProfile()
         print("\nstart firefox browser for test..")
         browser = webdriver.Firefox(firefox_profile=fp)
     else:
         print("Browser <browser_name> still is not implemented")
-    browser.implicitly_wait(5)
+    # browser.implicitly_wait(5)
     yield browser
-    print("\nquit browser..")
     browser.quit()

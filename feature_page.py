@@ -1,5 +1,5 @@
 from .base_page import BasePage
-import pytest
+import random
 import time
 from .locators import FeaturePageLocators
 
@@ -51,6 +51,32 @@ class FeaturePage(BasePage):
         assert (self.browser.current_url.startswith("https://music.yandex.ru/"))
         self.browser.close()
         self.browser.switch_to.window(self.browser.window_handles[0])
+
+    def fill_field_and_choose_suggest(self):
+        upper_letter, lower_letter = self.choose_random_letter()
+        self.browser.find_element(*FeaturePageLocators.INPUT_BOX).send_keys(upper_letter)
+        suggested_list = self.browser.find_elements(*FeaturePageLocators.SUGGEST_LIST)
+        for i in range(len(suggested_list)):
+            print(suggested_list[i].get_attribute('textContent'))
+        number = random.randint(0, len(suggested_list) - 1)
+        suggest = suggested_list[number].get_attribute('textContent')
+        print(suggest)
+        suggested_list[number].click()
+        time.sleep(2)
+        suggest2 = self.browser.find_element(*FeaturePageLocators.INPUT_BOX_2).get_property('value')
+        print(suggest2)
+        time.sleep(2)
+        assert suggest == suggest2
+
+    def search_results_should_contain_letter(self):
+        upper_letter, lower_letter = self.choose_random_letter()
+        print(upper_letter, lower_letter)
+        self.browser.find_element(*FeaturePageLocators.INPUT_BOX).send_keys(upper_letter)
+        suggested_list = self.browser.find_elements(*FeaturePageLocators.SUGGEST_LIST)
+        number = random.randint(0, len(suggested_list) - 1)
+        suggest = suggested_list[number].get_attribute('textContent')
+        print(suggest)
+        assert upper_letter in suggest or lower_letter in suggest
 
     def should_be_suggest_list(self):
         assert self.is_element_present(*FeaturePageLocators.SUGGEST_LIST_BLOCK), \
