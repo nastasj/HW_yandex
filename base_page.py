@@ -1,5 +1,4 @@
 import time
-
 from selenium import webdriver as RemoteWebDriver
 from selenium.common.exceptions import NoSuchElementException
 import random
