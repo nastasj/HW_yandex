@@ -1,7 +1,6 @@
 import pytest
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.chrome.options import Options
 
 
@@ -21,7 +20,6 @@ def browser(request):
         # browser = webdriver.Chrome(options=options)
     elif browser_name == "firefox":
         fp = webdriver.FirefoxProfile()
-        # firefox_profile=fp
         print("\nstart firefox browser for test..")
         browser = webdriver.Firefox(firefox_profile=fp)
         browser.maximize_window()
