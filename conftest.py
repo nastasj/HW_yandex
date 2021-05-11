@@ -1,6 +1,5 @@
 import pytest
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 
 
@@ -16,7 +15,7 @@ def browser(request):
         options = Options()
         options.add_argument('--start-maximized')
         # options.add_experimental_option('excludeSwitches', ['enable-logging'])
-        browser = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+        browser = webdriver.Chrome(options=options)
         # browser = webdriver.Chrome(options=options)
     elif browser_name == "firefox":
         fp = webdriver.FirefoxProfile()
